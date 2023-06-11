@@ -13,5 +13,23 @@ namespace ShoppingListApp.Infrastructure.Data.Constants
             public const int MaxUserFirstName = 50;
             public const int MaxUserLastName = 50;
         }
+
+        public static class Category
+        {
+            public const int MaxCategoryName = 50;
+        }
+
+        public static class Product
+        {
+            public const int MaxProductName = 50;
+            public const int MaxProductDescription = 500;
+            public const int MaxProductImageUrl = 300;
+
+            public const int PrecisionDecimal = 18;
+            public const int ScaleDecimal = 2;
+
+            public const string MaxProductPrice = "2000";
+            public const string MinPrice = "0.0";
+        }
     }
 }

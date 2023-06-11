@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShoppingListApp.Infrastructure.Data;
+using ShoppingListApp.Infrastructure.Data.Common;
 using ShoppingListApp.Infrastructure.Data.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ShoppingListDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 
