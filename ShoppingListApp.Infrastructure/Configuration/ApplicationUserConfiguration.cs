@@ -34,10 +34,13 @@ namespace ShoppingListApp.Infrastructure.Configuration
                 NormalizedUserName = "valeri",
                 Email = "valeri.yanev@icloud.com",
                 NormalizedEmail = "VALERI.YANEV@ICLOUD.COM",
+                SecurityStamp = Guid.NewGuid().ToString("D")
             };
 
             adminUser.PasswordHash =
-                 hasher.HashPassword(adminUser, "pass11");            
+                 hasher.HashPassword(adminUser, "pass11");
+
+            users.Add(adminUser);
 
             var customerUser = new ApplicationUser()
             {
@@ -47,12 +50,15 @@ namespace ShoppingListApp.Infrastructure.Configuration
                 UserName = "georgi",
                 NormalizedUserName = "GEORGI",
                 Email = "georgi@mail.com",
-                NormalizedEmail = "GEORGI@MAIL.COM",                
+                NormalizedEmail = "GEORGI@MAIL.COM",
+                SecurityStamp = Guid.NewGuid().ToString("D")
             };
 
             customerUser.PasswordHash =
                  hasher.HashPassword(customerUser, "georgi123");
-            
+
+            users.Add(customerUser);
+
 
             var otherCustomer = new ApplicationUser()
             {
@@ -62,14 +68,14 @@ namespace ShoppingListApp.Infrastructure.Configuration
                 UserName = "nakov",
                 NormalizedUserName = "NAKOV",
                 Email = "nakov@softuni.bg",
-                NormalizedEmail = "NAKOV@SOFTUNI.BG",               
+                NormalizedEmail = "NAKOV@SOFTUNI.BG",
+                SecurityStamp = Guid.NewGuid().ToString("D")
             };
 
             otherCustomer.PasswordHash =
                  hasher.HashPassword(otherCustomer, "cat123");
-
-            users.Add(adminUser);
-            users.Add(customerUser);
+            
+            
             users.Add(otherCustomer);
 
             return users;

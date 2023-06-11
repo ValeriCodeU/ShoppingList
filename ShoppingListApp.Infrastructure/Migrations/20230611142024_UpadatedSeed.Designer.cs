@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppingListApp.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ShoppingListApp.Infrastructure.Data;
 namespace ShoppingListApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    partial class ShoppingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611142024_UpadatedSeed")]
+    partial class UpadatedSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -336,7 +338,7 @@ namespace ShoppingListApp.Infrastructure.Migrations
                         {
                             Id = new Guid("48787569-f841-4832-8528-1f503a8427cf"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8182c592-588a-4a9b-87bb-1b077f72d702",
+                            ConcurrencyStamp = "81203099-c4ca-4154-bbad-49e8dd7bccb4",
                             Email = "valeri.yanev@icloud.com",
                             EmailConfirmed = false,
                             FirstName = "Valeri",
@@ -345,9 +347,8 @@ namespace ShoppingListApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "VALERI.YANEV@ICLOUD.COM",
                             NormalizedUserName = "valeri",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDThWBYQje498kGrMOaCY+8IvMBagsSE9JudOCjv4y3T2eOnVdK8HR+SKMhLm5K28g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENHNxtR8OhwwPZwBnOwatiahKfw2p7XyBC8hv8vSWqyou9rdkE1cJle+hskYt4hc2Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dec4810f-efa0-456f-8282-4d4a1761d311",
                             TwoFactorEnabled = false,
                             UserName = "valeri"
                         },
@@ -355,7 +356,7 @@ namespace ShoppingListApp.Infrastructure.Migrations
                         {
                             Id = new Guid("bfbcc7d7-2e7e-4d3c-b7fb-4b76f27cefe3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dbca2dc7-50a9-4757-bf6b-04719a808296",
+                            ConcurrencyStamp = "1b72d0a5-f8ae-40ca-a991-002a96e965a1",
                             Email = "georgi@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
@@ -364,9 +365,8 @@ namespace ShoppingListApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GEORGI@MAIL.COM",
                             NormalizedUserName = "GEORGI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC3XCSWL1zBXRpogpgh1pJKDHPKZY29AjBwUAx+br88GVHjJbpJvLaa77IuQ8hAfCg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ5bwZFHc57SMVOn3Eqd+7jLM3KUxM8hsSMH2IILoRa5NXlVMDPs27hNOHtMAOEuDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "357cf48e-34c9-41b0-9f54-7a089dd283de",
                             TwoFactorEnabled = false,
                             UserName = "georgi"
                         },
@@ -374,7 +374,7 @@ namespace ShoppingListApp.Infrastructure.Migrations
                         {
                             Id = new Guid("da24feae-ab42-4702-bbf9-9c5361aee8d6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1033a3ec-72cd-49e7-8561-3c52afc31017",
+                            ConcurrencyStamp = "45b7d6b0-0e1c-4a13-8c5c-4e91c4962bfe",
                             Email = "nakov@softuni.bg",
                             EmailConfirmed = false,
                             FirstName = "Svetlin",
@@ -383,9 +383,8 @@ namespace ShoppingListApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "NAKOV@SOFTUNI.BG",
                             NormalizedUserName = "NAKOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAECJXrCtENvm8tlRQggyOMvyxfeYdgZmM6PNWrPepr96ALrUnGTVaOM/Zahm9mn5Pbw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMzy+SN9YBbPAJCekkX8kFOK8hAcXH9m2n74k8ercXBzwetIT7R/pz4KFRg0Mvm8fA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ba78f2d-1557-4032-a8c9-5f5d209a08b1",
                             TwoFactorEnabled = false,
                             UserName = "nakov"
                         });
