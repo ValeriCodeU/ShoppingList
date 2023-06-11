@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingListApp.Core.Constants;
 using ShoppingListApp.Core.Models.Account;
 using ShoppingListApp.Infrastructure.Data.Identity;
 
@@ -41,7 +42,7 @@ namespace ShoppingListApp.Controllers
 
             if (result.Succeeded)
             {
-                //TempData[MessageConstant.SuccessMessage] = "You have successfully log in!";
+                TempData[MessageConstants.SuccessMessage] = "You have successfully log in!";
                 return RedirectToAction("Index", "Home");
             }
 

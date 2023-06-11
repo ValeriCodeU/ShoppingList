@@ -2,7 +2,7 @@
 
 namespace ShoppingListApp.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         public IActionResult Index()
         {

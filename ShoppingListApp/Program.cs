@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ShoppingListApp.Core.Contracts;
+using ShoppingListApp.Core.Services;
 using ShoppingListApp.Infrastructure.Data;
 using ShoppingListApp.Infrastructure.Data.Common;
 using ShoppingListApp.Infrastructure.Data.Identity;
@@ -24,6 +26,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
