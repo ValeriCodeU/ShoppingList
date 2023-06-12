@@ -23,7 +23,7 @@ namespace ShoppingListApp.Infrastructure.Configuration
 
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            //Admin user and manager of the web shop
+            //Seed data for admin user and manager of the web shop
 
             var adminUser = new ApplicationUser()
             {
@@ -41,6 +41,8 @@ namespace ShoppingListApp.Infrastructure.Configuration
                  hasher.HashPassword(adminUser, "pass11");
 
             users.Add(adminUser);
+
+            //Seed data for customer
 
             var customerUser = new ApplicationUser()
             {

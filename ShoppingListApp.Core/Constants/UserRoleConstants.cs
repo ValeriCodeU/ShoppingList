@@ -1,8 +1,8 @@
 ﻿namespace ShoppingListApp.Core.Constants
 {
-    public class AdminConstants
-    {
-        public const string AreaName = "Admin";
+    public class UserRoleConstants
+    {        
         public const string AdminRoleName = "Administrator";
+        public const string CustomerRoleName = "Customer";
     }
 }

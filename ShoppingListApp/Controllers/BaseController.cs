@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static ShoppingListApp.Core.Constants.AdminConstants;
 
 namespace ShoppingListApp.Controllers
 {
-    [Authorize(Roles = AdminRoleName)]
+    [Authorize]
 
     public class BaseController : Controller
     {        

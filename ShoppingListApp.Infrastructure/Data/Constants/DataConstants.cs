@@ -26,10 +26,7 @@ namespace ShoppingListApp.Infrastructure.Data.Constants
             public const int MaxProductImageUrl = 300;
 
             public const int PrecisionDecimal = 18;
-            public const int ScaleDecimal = 2;
-
-            public const string MaxProductPrice = "2000";
-            public const string MinPrice = "0.0";
+            public const int ScaleDecimal = 2;           
         }
     }
 }

@@ -7,7 +7,7 @@ using ShoppingListApp.Infrastructure.Data.Identity;
 
 namespace ShoppingListApp.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -21,6 +21,7 @@ namespace ShoppingListApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
 
         public IActionResult Login()
         {
@@ -35,6 +36,7 @@ namespace ShoppingListApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -51,7 +53,8 @@ namespace ShoppingListApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]        
+        [HttpGet]
+        [AllowAnonymous]
 
         public IActionResult Register()
         {
@@ -60,7 +63,8 @@ namespace ShoppingListApp.Controllers
             return View(model);
         }
 
-        [HttpPost]        
+        [HttpPost]
+        [AllowAnonymous]
 
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
