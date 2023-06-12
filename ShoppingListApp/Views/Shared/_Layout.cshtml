@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShoppingListApp.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -51,7 +52,7 @@
                             @if (this.User.IsInRole("Customer"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Mine">My Products</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ShoppingList">My Shopping List</a>
                                 </li>
                             }
                           
@@ -73,8 +74,7 @@
         <div class="container">
             &copy; @DateTime.UtcNow.Year - Shopping List Application 
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    </footer>    
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/toastr/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

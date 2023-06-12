@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Models.Products;
 using static ShoppingListApp.Core.Constants.UserRoleConstants;
@@ -56,7 +57,7 @@ namespace ShoppingListApp.Controllers
 
             var id = await productService.CreateAsync(model);
 
-            return Ok();
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet]
@@ -66,6 +67,32 @@ namespace ShoppingListApp.Controllers
             var product = await productService.ProductDetailsByIdAsync(id);
 
             return View(product);
+        }
+
+        public async Task<IActionResult> All([FromQuery] AllProductsQueryModel query)
+        {
+            var productsPerPage = AllProductsQueryModel.ProductPerPage;
+            var result = await productService
+                .AllAsync(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                productsPerPage);
+
+            //var result = await productService.AllAsync(
+            //    query.Category,
+            //    query.SearchTerm,
+            //    query.Sorting,
+            //    query.CurrentPage,
+            //    AllProductsQueryModel.ProductPerPage);
+
+            query.TotalProductsCount = result.TotalProductsCount;
+            query.Products = result.Products;
+
+            query.Categories = await productService.AllGategoriesNamesAsync();
+
+            return View(query);
         }
     }
 }

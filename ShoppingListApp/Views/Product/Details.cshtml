@@ -32,14 +32,14 @@
 				   asp-route-id="@Model.Id">Delete</a>
 					@if (!Model.IsSold)
 					{
-						<form class="ml-2" asp-controller="Houses"
+						<form class="ml-2" asp-controller="Product"
 					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
 							<input class="btn btn-primary" type="submit" value="Buy" />
 						</form>
 					}
 					else
 					{
-						<form class="ml-2" asp-controller="Houses" asp-action="Leave"
+						<form class="ml-2" asp-controller="Product" asp-action="Leave"
 					  asp-route-id="@Model.Id" method="post">
 							<input class="btn btn-primary" type="submit" value="Leave" />
 						</form>

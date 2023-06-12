@@ -86,7 +86,7 @@ namespace ShoppingListApp.Controllers
             if (result.Succeeded)
             {                
                 await signInManager.SignInAsync(user, isPersistent: false);
-                //TempData[MessageConstant.SuccessMessage] = "You have successfully become a new user!";
+                TempData[MessageConstants.SuccessMessage] = "You have successfully become a new user!";
                 return RedirectToAction("Index", "Home");
                 //return RedirectToAction("Login", "Account");
             }
@@ -104,7 +104,7 @@ namespace ShoppingListApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            //TempData[MessageConstant.ErrorMessage] = "You have successfully log out!";
+            TempData[MessageConstants.ErrorMessage] = "You have successfully log out!";
 
             return RedirectToAction("Index", "Home");
         }

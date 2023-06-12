@@ -1,0 +1,41 @@
+﻿@model ProductServiceModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="House Image">
+        <div class="card-body text-center">
+            <h4>@Model.Name</h4>
+            @*<h6>text: <b>@Model.</b></h6>*@
+            <h6>
+                Product Price:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </h6>
+            <h6>(@(Model.IsSold ? "Sold out" : "Not Sold"))</h6>
+            <br />
+            <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Details</a>
+            @if (this.User?.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-warning">Edit</a>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-danger">Delete</a>
+                <p></p>
+                @if (!Model.IsSold)
+                {
+                    <form class="input-group-sm" asp-controller="Product"
+                  asp-action="Buy" asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-primary" type="submit" value="Buy" />
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Product" asp-action="Leave"
+                  asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-primary" type="submit" value="Leave" />
+                    </form>
+                }
+            }
+        </div>
+    </div>
+</div>

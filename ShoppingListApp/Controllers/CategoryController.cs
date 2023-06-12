@@ -43,6 +43,8 @@ namespace ShoppingListApp.Controllers
 
             await categoryService.AddCategoryAsync(model);
 
+            TempData[MessageConstants.SuccessMessage] = "You succesfully added this catebgory!";
+
             return RedirectToAction(nameof(All));
         }
 
