@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ShoppingListApp.Core.Models.Products
 {
@@ -12,9 +6,7 @@ namespace ShoppingListApp.Core.Models.Products
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
-
-        public string Description { get; set; } = null!;
+        public string Name { get; set; } = null!;       
 
         [Display(Name = "Image URL")]
 
@@ -26,6 +18,6 @@ namespace ShoppingListApp.Core.Models.Products
 
         [Display(Name = "Is Saled")]
 
-        public bool IsSaled { get; set; }
+        public bool IsSold { get; set; }
     }
 }

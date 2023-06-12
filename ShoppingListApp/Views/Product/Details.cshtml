@@ -1,5 +1,68 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProductDetailsViewModel
+
 @{
+	ViewBag.Title = "Product Details";
 }
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+	<div class="row">
+		<div class="col-4">
+			<img class="card-img-top" style="width: 20rem;"
+				 src="@Model.ImageUrl" alt="Product Image">
+		</div>
+		<div class="card col-8 border-0">
+			<p style="font-size:25px;"><u>@Model.Name</u></p>
+			<p>Product Name: <b>@Model.Name</b></p>
+			<p>
+				Product Price:
+				<b>@String.Format("{0:f2}", Model.Price) BGN</b>
+			</p>
+			<p>@Model.Description</p>
+			<p>Category: <b>@Model.CategoryName</b></p>
+			<p><i>(@(Model.IsSold ? "Sold Out" : "Not Sold"))</i></p>
+			<div class="form-inline">
+				@if (this.User?.Identity?.IsAuthenticated ?? false)
+				{
+					<a class="btn btn-warning" asp-controller="Product" asp-action="Edit"
+				   asp-route-id="@Model.Id">Edit</a>
+					<a class="ml-2 btn btn-danger" asp-controller="Product" asp-action="Delete"
+				   asp-route-id="@Model.Id">Delete</a>
+					@if (!Model.IsSold)
+					{
+						<form class="ml-2" asp-controller="Houses"
+					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" type="submit" value="Buy" />
+						</form>
+					}
+					else
+					{
+						<form class="ml-2" asp-controller="Houses" asp-action="Leave"
+					  asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" type="submit" value="Leave" />
+						</form>
+					}
+				}
+			</div>
+			<p></p>
+			@if (Model.Customer.Id != 0)
+			{
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Customer Info</h5>
+						<p class="card-text">Email:  @Model.Customer.FirstName</p>
+						<p class="card-text">Email:  @Model.Customer.LastName</p>
+						<p class="card-text">Email:  @Model.Customer.Email</p>
+						<p class="card-text">Phone Number: @Model.Customer.PhoneNumber</p>
+					</div>
+				</div>
+			}
+			else
+			{
+				<h3 class="text">No customer yet!</h3>
+			}
+		</div>
+	</div>
+</div>

@@ -58,5 +58,14 @@ namespace ShoppingListApp.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await productService.ProductDetailsByIdAsync(id);
+
+            return View(product);
+        }
     }
 }

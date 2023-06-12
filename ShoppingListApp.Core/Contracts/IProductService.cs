@@ -10,5 +10,7 @@ namespace ShoppingListApp.Core.Contracts
     public interface IProductService
     {
         Task<int> CreateAsync(ProductFormModel model);
+
+        Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id);
     }
 }

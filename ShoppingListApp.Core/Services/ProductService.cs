@@ -1,4 +1,5 @@
-﻿using ShoppingListApp.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Models.Products;
 using ShoppingListApp.Infrastructure.Data.Common;
 using ShoppingListApp.Infrastructure.Data.Entities;
@@ -33,6 +34,27 @@ namespace ShoppingListApp.Core.Services
             await repo.SaveChangesAsync();
 
             return product.Id;
+        }
+
+        public async Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id)
+        {
+            return await repo.AllReadonly<Product>()
+                .Where(p => p.Id == id && p.IsActive)
+                .Select(p => new ProductDetailsViewModel()
+                {
+                    CategoryName = p.Category.Name,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    Customer = new Models.Customers.CustomerServiceModel()
+                    {
+                        FirstName = p.Customer.FirstName,
+                        LastName = p.Customer.LastName,
+                        PhoneNumber = p.Customer.PhoneNumber,
+                        Email = p.Customer.Email,
+                    }
+
+                }).FirstAsync();
         }
     }
 }
