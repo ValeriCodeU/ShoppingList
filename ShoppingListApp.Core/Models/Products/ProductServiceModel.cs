@@ -16,7 +16,7 @@ namespace ShoppingListApp.Core.Models.Products
 
         public decimal Price { get; set; }
 
-        [Display(Name = "Is Saled")]
+        [Display(Name = "Is Sold")]
 
         public bool IsSold { get; set; }
     }

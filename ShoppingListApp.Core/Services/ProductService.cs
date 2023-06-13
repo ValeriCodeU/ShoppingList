@@ -55,7 +55,7 @@ namespace ShoppingListApp.Core.Services
                     Id = p.Id,
                     Name = p.Name,                    
                     ImageUrl = p.ImageUrl,
-                    IsSold = p.CategoryId != 0,
+                    IsSold = p.CustomerId != null,
                     Price = p.Price
                 }).ToListAsync();
 
@@ -121,6 +121,7 @@ namespace ShoppingListApp.Core.Services
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
                     Description = p.Description,
+                    IsSold = p.CustomerId != null,
                     Customer = new Models.Customers.CustomerServiceModel()
                     {
                         FirstName = p.Customer.FirstName,
