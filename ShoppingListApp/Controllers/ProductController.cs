@@ -169,7 +169,7 @@ namespace ShoppingListApp.Controllers
         {
             var userId = User.Id();
 
-            
+            await productService.RemoveFromListAsync(id);
 
             return RedirectToAction(nameof(ListProducts));
         }

@@ -35,7 +35,7 @@ namespace ShoppingListApp.Core.Services
         {
             var result = new ProductQueryServiceModel();
 
-            var products = repo.AllReadonly<Product>().Where(p => p.IsActive);
+            var products = repo.AllReadonly<Product>().Where(p => p.IsActive && p.CustomerId == null);
 
             if (!String.IsNullOrEmpty(category))
             {
@@ -59,7 +59,7 @@ namespace ShoppingListApp.Core.Services
             };
 
             var productList = await products.Skip((currentPage - 1) * productsPerPage).Take(productsPerPage)
-                .Select(p => new ProductServiceModel()
+                .Select(p => new ProductServiceModel()                
                 {
                     Id = p.Id,
                     Name = p.Name,                    
@@ -159,6 +159,15 @@ namespace ShoppingListApp.Core.Services
         public async Task<bool> ProductExistsAsync(int id)
         {
             return await repo.AllReadonly<Product>().AnyAsync(p => p.Id == id && p.IsActive);
+        }
+
+        public async Task RemoveFromListAsync(int productId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            product.CustomerId = null;
+
+            await repo.SaveChangesAsync();
         }
     }
 }
