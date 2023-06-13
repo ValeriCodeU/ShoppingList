@@ -74,5 +74,7 @@ namespace ShoppingListApp.Core.Services
 
             await repo.SaveChangesAsync();
         }
+
+        
     }
 }

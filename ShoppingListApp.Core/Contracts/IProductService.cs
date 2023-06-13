@@ -1,6 +1,7 @@
 ﻿using ShoppingListApp.Core.Models.Category;
 using ShoppingListApp.Core.Models.Products;
 using ShoppingListApp.Core.Models.Products.Enums;
+using System.Threading.Tasks;
 
 namespace ShoppingListApp.Core.Contracts
 {
@@ -18,5 +19,11 @@ namespace ShoppingListApp.Core.Contracts
             int productsPerPage = 1);
 
         Task<IEnumerable<string>> AllGategoriesNamesAsync();
+
+        Task<bool> ProductExistsAsync(int id);
+
+        Task<int> GetProductCategoryIdAsync(int productId);
+
+        Task EditProductAsync(ProductFormModel model, int productId);
     }
 }

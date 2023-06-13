@@ -8,7 +8,7 @@
 </div>
 *@
 
-@if (true)
+@if (this.User.IsInRole("Administrator"))
 {
     <div class="mt-4 p-5 bg-light">
         <h1 class="display-4 text-center">Welcome to the our Shopping List!</h1>
@@ -20,9 +20,28 @@
         <p class="lead text-center">
             @if (this.User?.Identity?.IsAuthenticated ?? false)
             {
+                 <a asp-controller="Product" asp-action="All" class="btn btn-primary btn-lg"
+           role="button">All Products</a>
+
                 <a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
            role="button">Add Product</a>
             }
         </p>
     </div>
+} else
+{
+     <div class="mt-4 p-5 bg-light">
+        <h1 class="display-4 text-center">Welcome to the our Shopping List!</h1>
+        <p class="lead text-center">
+            Show all products
+        </p>
+        <hr class="my-4">
+        <p class="lead text-center">
+            @if (this.User?.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Product" asp-action="All" class="btn btn-primary btn-lg"
+           role="button">All Products</a>
+            }
+        </p>
+    </div>   
 }

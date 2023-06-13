@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
+using ShoppingListApp.Core.Constants;
 using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Models.Products;
 using static ShoppingListApp.Core.Constants.UserRoleConstants;
@@ -93,6 +93,63 @@ namespace ShoppingListApp.Controllers
             query.Categories = await productService.AllGategoriesNamesAsync();
 
             return View(query);
+        }
+
+        [HttpGet]       
+        [Authorize(Roles = AdminRoleName)]
+
+        public async Task<IActionResult> Edit(int id)
+        {           
+
+            if (!await productService.ProductExistsAsync(id))
+            {
+                TempData[MessageConstants.ErrorMessage] = "This product doest not exists!";
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = new ProductFormModel();
+
+            var product = await productService.ProductDetailsByIdAsync(id);
+            var productCategoryId = await productService.GetProductCategoryIdAsync(product.Id);
+
+            model.Name = product.Name;
+            model.Price = product.Price;
+            model.ImageUrl = product.ImageUrl;
+            model.Description = product.Description;
+            model.CategoryId = productCategoryId;
+            model.Categories = await categoryService.AllCategoriesAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = AdminRoleName)]
+
+        public async Task<IActionResult> Edit(ProductFormModel model, int id)
+        {
+            if (!await productService.ProductExistsAsync(id))
+            {
+                TempData[MessageConstants.ErrorMessage] = "This product doest not exists!";
+                return RedirectToAction(nameof(All));
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await productService.EditProductAsync(model, id);
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+
+        public async Task<IActionResult> ListProducts()
+        {
+            //IEnumerable<ProductServiceModel> model;
+
+            return View();
         }
     }
 }

@@ -16,24 +16,29 @@
                class="btn btn-success">Details</a>
             @if (this.User?.Identity?.IsAuthenticated ?? false)
             {
-                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
-               class="btn btn-warning">Edit</a>
-                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
-               class="btn btn-danger">Delete</a>
-                <p></p>
+                @if (this.User.IsInRole("Administrator"))
+                {
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+                    class="btn btn-warning">Edit</a>
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+                    class="btn btn-danger">Delete</a>
+                    
+                    
+                }
+                <p></p>              
                 @if (!Model.IsSold)
                 {
-                    <form class="input-group-sm" asp-controller="Product"
-                  asp-action="Buy" asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-primary" type="submit" value="Buy" />
-                    </form>
+                      <form class="input-group-sm" asp-controller="Product"
+                      asp-action="Buy" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Buy" />
+                      </form>
                 }
                 else
                 {
-                    <form asp-controller="Product" asp-action="Leave"
-                  asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-primary" type="submit" value="Leave" />
-                    </form>
+                        <form asp-controller="Product" asp-action="Leave"
+                         asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Leave" />
+                        </form>
                 }
             }
         </div>

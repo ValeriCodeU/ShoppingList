@@ -19,6 +19,6 @@ namespace ShoppingListApp.Core.Contracts
 
         Task<CategoryDetailsViewModel> CategoryDetailsByIdAsync(int id);
 
-        Task<bool> DeleteCategoryAsync(int id);
+        Task<bool> DeleteCategoryAsync(int id);        
     }
 }

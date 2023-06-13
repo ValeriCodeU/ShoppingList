@@ -89,15 +89,37 @@ namespace ShoppingListApp.Core.Services
             return product.Id;
         }
 
+        public async Task EditProductAsync(ProductFormModel model, int productId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            if (product.IsActive)
+            {
+                product.Price = model.Price;
+                product.CategoryId = model.CategoryId;
+                product.ImageUrl = model.ImageUrl;
+                product.Description = model.Description;
+
+                await repo.SaveChangesAsync();
+            }
+        }
+
+        public async Task<int> GetProductCategoryIdAsync(int productId)
+        {
+            return (await repo.GetByIdAsync<Product>(productId)).CategoryId;
+        }
+
         public async Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id)
         {
             return await repo.AllReadonly<Product>()
                 .Where(p => p.Id == id && p.IsActive)
                 .Select(p => new ProductDetailsViewModel()
                 {
+                    Id = p.Id,
                     CategoryName = p.Category.Name,
                     Name = p.Name,
                     ImageUrl = p.ImageUrl,
+                    Price = p.Price,
                     Description = p.Description,
                     Customer = new Models.Customers.CustomerServiceModel()
                     {
@@ -108,6 +130,11 @@ namespace ShoppingListApp.Core.Services
                     }
 
                 }).FirstAsync();
+        }
+
+        public async Task<bool> ProductExistsAsync(int id)
+        {
+            return await repo.AllReadonly<Product>().AnyAsync(p => p.Id == id && p.IsActive);
         }
     }
 }
