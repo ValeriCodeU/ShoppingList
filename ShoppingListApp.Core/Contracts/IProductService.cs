@@ -31,5 +31,9 @@ namespace ShoppingListApp.Core.Contracts
         Task AddToListAsync(int productId, Guid userId);
 
         Task RemoveFromListAsync(int productId);
+
+        Task MarkProductAsSold(int productId, Guid userId);
+
+        Task<bool> DeleteProductAsync(int productId);
     }
 }

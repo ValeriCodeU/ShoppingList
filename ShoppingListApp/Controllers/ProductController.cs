@@ -81,13 +81,6 @@ namespace ShoppingListApp.Controllers
                 query.CurrentPage,
                 productsPerPage);
 
-            //var result = await productService.AllAsync(
-            //    query.Category,
-            //    query.SearchTerm,
-            //    query.Sorting,
-            //    query.CurrentPage,
-            //    AllProductsQueryModel.ProductPerPage);
-
             query.TotalProductsCount = result.TotalProductsCount;
             query.Products = result.Products;
 
@@ -171,7 +164,62 @@ namespace ShoppingListApp.Controllers
 
             await productService.RemoveFromListAsync(id);
 
+
+
             return RedirectToAction(nameof(ListProducts));
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> MarkSold(int id)
+        {
+            var userId = User.Id();
+
+            await productService.MarkProductAsSold(id, userId);
+
+            return RedirectToAction(nameof(ListProducts));
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Delete (int id)
+        {
+            if (!await productService.ProductExistsAsync(id))
+            {
+                TempData[MessageConstants.ErrorMessage] = "This product doest not exists!";
+                return RedirectToAction(nameof(All));
+            }
+
+            var product = await productService.ProductDetailsByIdAsync(id);
+
+            var model = new ProductDeleteViewModel()
+            {
+                Name = product.Name,
+                Id = product.Id
+                
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Delete (ProductDeleteViewModel model)
+        {
+            if (!await productService.ProductExistsAsync(model.Id))
+            {
+                TempData[MessageConstants.ErrorMessage] = "This product doest not exists!";
+                return RedirectToAction(nameof(All));
+            }
+
+            var result = await productService.DeleteProductAsync(model.Id);
+
+            if (result)
+            {
+                TempData[MessageConstants.SuccessMessage] = "This product has been successfully deleted!";
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

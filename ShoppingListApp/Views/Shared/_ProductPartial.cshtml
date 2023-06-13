@@ -21,25 +21,29 @@
                     <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
                     class="btn btn-warning">Edit</a>
                     <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
-                    class="btn btn-danger">Delete</a>
-                    
+                    class="btn btn-danger">Delete</a>                    
                     
                 }
-                <p></p>              
-                @if (!Model.IsSold)
+                <p></p>
+
+                @if (this.User.IsInRole("Customer"))
                 {
-                      <form class="input-group-sm" asp-controller="Product"
-                      asp-action="AddProductToCollection" asp-route-id="@Model.Id" method="post">
+                    @if (!Model.IsSold)
+                    {
+                        <form class="input-group-sm" asp-controller="Product"
+                  asp-action="AddProductToCollection" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Add to Collection" />
-                      </form>
-                }
-                else
-                {
-                        <form asp-controller="Product" asp-action="Leave"
-                         asp-route-id="@Model.Id" method="post">
-                            <input class="btn btn-primary" type="submit" value="Leave" />
                         </form>
-                }
+                    }
+                    else
+                    {
+                        <form asp-controller="Product" asp-action="RemoveProductFromCollection"
+                  asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-danger" type="submit" value="Remove" />
+                        </form>
+                    }
+                }              
+               
             }
         </div>
     </div>

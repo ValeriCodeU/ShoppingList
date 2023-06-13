@@ -22,7 +22,7 @@
 			</p>
 			<p>@Model.Description</p>
 			<p>Category: <b>@Model.CategoryName</b></p>
-			<p><i>(@(Model.IsSold ? "Sold Out" : "Not Sold"))</i></p>
+			<p><i>(@(!Model.IsSold ? "Not Sold" : "Sold"))</i></p>
 			<div class="form-inline">
 				@if (this.User?.Identity?.IsAuthenticated ?? false)
 				{

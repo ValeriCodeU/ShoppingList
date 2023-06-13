@@ -35,7 +35,7 @@ namespace ShoppingListApp.Core.Services
         {
             var result = new ProductQueryServiceModel();
 
-            var products = repo.AllReadonly<Product>().Where(p => p.IsActive && p.CustomerId == null);
+            var products = repo.AllReadonly<Product>().Where(p => p.IsActive);
 
             if (!String.IsNullOrEmpty(category))
             {
@@ -98,6 +98,17 @@ namespace ShoppingListApp.Core.Services
             return product.Id;
         }
 
+        public async Task<bool> DeleteProductAsync(int productId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            product.IsActive = false;
+
+            await repo.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task EditProductAsync(ProductFormModel model, int productId)
         {
             var product = await repo.GetByIdAsync<Product>(productId);
@@ -128,14 +139,23 @@ namespace ShoppingListApp.Core.Services
                     Name = p.Name,
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
-                    IsSold = p.CustomerId != null
+                    IsSold = p.CustomerId == userid && p.IsActive == false
                 }).ToListAsync();
+        }
+
+        public async Task MarkProductAsSold(int productId, Guid userId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            product.IsActive = false;
+
+            await repo.SaveChangesAsync();
         }
 
         public async Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id)
         {
             return await repo.AllReadonly<Product>()
-                .Where(p => p.Id == id && p.IsActive)
+                .Where(p => p.Id == id)
                 .Select(p => new ProductDetailsViewModel()
                 {
                     Id = p.Id,
@@ -144,7 +164,7 @@ namespace ShoppingListApp.Core.Services
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
                     Description = p.Description,
-                    IsSold = p.CustomerId != null,
+                    IsSold = p.CustomerId != null && !p.IsActive,
                     Customer = new Models.Customers.CustomerServiceModel()
                     {
                         FirstName = p.Customer.FirstName,

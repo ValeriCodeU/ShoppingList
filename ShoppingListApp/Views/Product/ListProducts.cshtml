@@ -16,6 +16,7 @@
 
 			<th scope="col">Price</th>
 			<th scope="col">Actions</th>
+			<th scope="col">Mark</th>
 
 		</tr>
 	</thead>
@@ -23,17 +24,40 @@
 		@foreach (var product in Model)
 		{
 			count++;
+
 			<tr>
 				<th scope="row">@count</th>
-				<td>@product.Name</td>
+				<td>@product.Name</td>				
+				<td>@String.Format("{0:f2}", product.Price)</td>
 
-				<td>@product.Price</td>
+				@if (!product.IsSold)
+				{
+					<td>
+						<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+						@*<a asp-area="" asp-action="MarkSold" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-success">Buy</a>*@
+						<a asp-area="" asp-action="RemoveProductFromCollection" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-danger">Remove</a>
+					</td>
 
-				<td>
-					<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
-					<a asp-area="" asp-action="Buy" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-success">Buy</a>
-					<a asp-area="" asp-action="RemoveProductFromCollection" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-danger">Remove</a>
-				</td>
+					<td>
+						<form class="ml-2" asp-controller="Product"
+					  asp-action="MarkSold" asp-route-id="@product.Id" method="post">
+							<input class="btn btn-success" type="submit" value="Buy" />
+						</form>
+					</td>
+				}
+				else
+				{
+					<td>
+						<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+					</td>
+					<td>
+						<p>
+							This product is sold!
+						</p>
+					</td>
+
+				}
+
 			</tr>
 		}
 

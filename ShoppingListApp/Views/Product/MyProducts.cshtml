@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ProductServiceModel>
+
+@{
+	ViewBag.Title = "View My Products";
+	int count = 0;
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-success table-hover">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+
+			<th scope="col">Price</th>
+			<th scope="col">Actions</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var product in Model)
+		{
+			count++;
+			<tr>
+				<th scope="row">@count</th>
+				<td>@product.Name</td>
+				<td>@String.Format("{0:f2}", product.Price)</td>
+				<td>
+					<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>					
+				</td>
+			</tr>
+		}
+
+	</tbody>
+</table>
