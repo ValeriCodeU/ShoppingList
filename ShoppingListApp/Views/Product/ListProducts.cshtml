@@ -12,8 +12,8 @@
 	<thead>
 		<tr>
 			<th scope="col">#</th>
-			<th scope="col">Name</th>			
-				
+			<th scope="col">Name</th>
+
 			<th scope="col">Price</th>
 			<th scope="col">Actions</th>
 
@@ -25,15 +25,14 @@
 			count++;
 			<tr>
 				<th scope="row">@count</th>
-				<td>@product.Name</td>				
-					
+				<td>@product.Name</td>
+
 				<td>@product.Price</td>
 
 				<td>
 					<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
-					<a asp-area="" asp-action="RemoveProductFromCollection" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-success">Remove</a>
 					<a asp-area="" asp-action="Buy" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-success">Buy</a>
-					
+					<a asp-area="" asp-action="RemoveProductFromCollection" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-danger">Remove</a>
 				</td>
 			</tr>
 		}

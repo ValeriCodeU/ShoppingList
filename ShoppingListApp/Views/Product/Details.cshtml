@@ -26,23 +26,31 @@
 			<div class="form-inline">
 				@if (this.User?.Identity?.IsAuthenticated ?? false)
 				{
-					<a class="btn btn-warning" asp-controller="Product" asp-action="Edit"
+					@if (this.User.IsInRole("Administrator"))
+					{
+						<a class="btn btn-warning" asp-controller="Product" asp-action="Edit"
 				   asp-route-id="@Model.Id">Edit</a>
-					<a class="ml-2 btn btn-danger" asp-controller="Product" asp-action="Delete"
+						<a class="ml-2 btn btn-danger" asp-controller="Product" asp-action="Delete"
 				   asp-route-id="@Model.Id">Delete</a>
-					@if (!Model.IsSold)
-					{
-						<form class="ml-2" asp-controller="Product"
-					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
-							<input class="btn btn-primary" type="submit" value="Buy" />
-						</form>
 					}
-					else
+
+
+					@if (this.User.IsInRole("Customer"))
 					{
-						<form class="ml-2" asp-controller="Product" asp-action="Leave"
+						//!Model.IsSold
+
+						@if (true)
+						{
+							<form class="ml-2" asp-controller="Product"
+					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
+								<input class="btn btn-success" type="submit" value="Buy" />
+							</form>
+							<p></p>
+							<form class="ml-2" asp-controller="Product" asp-action="RemoveProductFromCollection"
 					  asp-route-id="@Model.Id" method="post">
-							<input class="btn btn-primary" type="submit" value="Leave" />
-						</form>
+								<input class="btn btn-danger" type="submit" value="Remove" />
+							</form>
+						}
 					}
 				}
 			</div>
