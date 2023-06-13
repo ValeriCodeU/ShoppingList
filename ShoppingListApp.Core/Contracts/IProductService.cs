@@ -25,5 +25,9 @@ namespace ShoppingListApp.Core.Contracts
         Task<int> GetProductCategoryIdAsync(int productId);
 
         Task EditProductAsync(ProductFormModel model, int productId);
+
+        Task<IEnumerable<ProductServiceModel>> GetUserProductsAsync(Guid userid);
+
+        Task AddToListAsync(int productId, Guid userId);
     }
 }

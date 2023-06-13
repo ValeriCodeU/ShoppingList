@@ -29,8 +29,8 @@
                 @if (!Model.IsSold)
                 {
                       <form class="input-group-sm" asp-controller="Product"
-                      asp-action="Buy" asp-route-id="@Model.Id" method="post">
-                            <input class="btn btn-primary" type="submit" value="Buy" />
+                      asp-action="AddProductToCollection" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Add to Collection" />
                       </form>
                 }
                 else

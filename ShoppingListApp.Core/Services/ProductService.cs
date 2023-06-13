@@ -22,6 +22,15 @@ namespace ShoppingListApp.Core.Services
             repo = _repo;
         }
 
+        public async Task AddToListAsync(int productId, Guid userId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            product.CustomerId = userId;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int productsPerPage = 1)
         {
             var result = new ProductQueryServiceModel();
@@ -107,6 +116,20 @@ namespace ShoppingListApp.Core.Services
         public async Task<int> GetProductCategoryIdAsync(int productId)
         {
             return (await repo.GetByIdAsync<Product>(productId)).CategoryId;
+        }
+
+        public async Task<IEnumerable<ProductServiceModel>> GetUserProductsAsync(Guid userid)
+        {
+            return await repo.AllReadonly<Product>()
+                .Where(p => p.CustomerId == userid).
+                Select(p => new ProductServiceModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    IsSold = p.CustomerId != null
+                }).ToListAsync();
         }
 
         public async Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id)

@@ -43,7 +43,7 @@ namespace ShoppingListApp.Infrastructure.Data.Entities
 
         [ForeignKey(nameof(CustomerId))]
 
-        public ApplicationUser? Customer { get; set; }       
+        public ApplicationUser? Customer { get; set; }        
 
         public bool IsActive { get; set; } = true;
     }

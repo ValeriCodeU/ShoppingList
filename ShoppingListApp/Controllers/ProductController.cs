@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShoppingListApp.Core.Constants;
 using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Models.Products;
+using ShoppingListApp.Extensions;
 using static ShoppingListApp.Core.Constants.UserRoleConstants;
 
 namespace ShoppingListApp.Controllers
@@ -144,12 +145,33 @@ namespace ShoppingListApp.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
+        [HttpGet]
 
         public async Task<IActionResult> ListProducts()
         {
-            //IEnumerable<ProductServiceModel> model;
+            var userId = User.Id();
 
-            return View();
+            var model = await productService.GetUserProductsAsync(userId);            
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddProductToCollection(int id)
+        {
+            var userId = User.Id();
+
+            await productService.AddToListAsync(id, userId);
+
+            return RedirectToAction(nameof(ListProducts));
+        }
+
+        public async Task<IActionResult> RemoveProductFromCollection(int id)
+        {
+            var userId = User.Id();
+
+            
+
+            return RedirectToAction(nameof(ListProducts));
         }
     }
 }
