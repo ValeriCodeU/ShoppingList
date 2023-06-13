@@ -39,7 +39,7 @@
 					{
 						//!Model.IsSold
 
-						@if (true)
+						@if (!Model.IsSold)
 						{
 							<form class="ml-2" asp-controller="Product"
 					  asp-action="Buy" asp-route-id="@Model.Id" method="post">

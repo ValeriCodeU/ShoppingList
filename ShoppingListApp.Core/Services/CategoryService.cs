@@ -15,15 +15,18 @@ namespace ShoppingListApp.Core.Services
             repo = _repo;
         }
 
-        public async Task AddCategoryAsync(CategoryDetailsViewModel model)
+        public async Task<int> AddCategoryAsync(CategoryDetailsViewModel model)
         {
             var category = new Category()
             {
                 Name = model.Name,
             };
 
+            
             await repo.AddAsync(category);
             await repo.SaveChangesAsync();
+
+            return category.Id;
         }
 
         public async Task<IEnumerable<CategoryDetailsViewModel>> AllCategoriesAsync()

@@ -41,9 +41,12 @@ namespace ShoppingListApp.Controllers
                 return View(model);
             }
 
-            await categoryService.AddCategoryAsync(model);
+            var result = await categoryService.AddCategoryAsync(model);
 
-            TempData[MessageConstants.SuccessMessage] = "You succesfully added this catebgory!";
+            if (result != 0)
+            {
+                TempData[MessageConstants.SuccessMessage] = "You succesfully added this category!";
+            }            
 
             return RedirectToAction(nameof(All));
         }
@@ -78,6 +81,11 @@ namespace ShoppingListApp.Controllers
                 TempData[MessageConstants.ErrorMessage] = "Category does not exist!";
 
                 return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
 
             await categoryService.EditCategoryAsync(id, model);

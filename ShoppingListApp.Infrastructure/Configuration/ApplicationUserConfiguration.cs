@@ -61,6 +61,7 @@ namespace ShoppingListApp.Infrastructure.Configuration
 
             users.Add(customerUser);
 
+            //Seed data for customer
 
             var otherCustomer = new ApplicationUser()
             {

@@ -11,7 +11,7 @@ namespace ShoppingListApp.Core.Contracts
     {
         Task<IEnumerable<CategoryDetailsViewModel>> AllCategoriesAsync();
 
-        Task AddCategoryAsync(CategoryDetailsViewModel model);
+        Task<int> AddCategoryAsync(CategoryDetailsViewModel model);
 
         Task EditCategoryAsync(int categoryId, CategoryDetailsViewModel model);
 

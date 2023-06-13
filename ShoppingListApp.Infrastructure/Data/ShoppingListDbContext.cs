@@ -23,6 +23,8 @@ namespace ShoppingListApp.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
 
             this.SeedRoles(builder);
             this.SeedUserRoles(builder);

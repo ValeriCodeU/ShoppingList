@@ -58,6 +58,11 @@ namespace ShoppingListApp.Controllers
 
             var id = await productService.CreateAsync(model);
 
+            if (id != 0)
+            {
+                TempData[MessageConstants.SuccessMessage] = "You have successfully added a product";
+            }
+
             return RedirectToAction(nameof(Details), new { id });
         }
 
