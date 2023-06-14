@@ -33,8 +33,7 @@
 				@if (!product.IsSold)
 				{
 					<td>
-						<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
-						@*<a asp-area="" asp-action="MarkSold" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-success">Buy</a>*@
+						<a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">Details</a>						
 						<a asp-area="" asp-action="RemoveProductFromCollection" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-danger">Remove</a>
 					</td>
 
