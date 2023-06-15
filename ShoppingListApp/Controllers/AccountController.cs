@@ -10,14 +10,16 @@ namespace ShoppingListApp.Controllers
     public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly SignInManager<ApplicationUser> signInManager;       
 
         public AccountController(
             UserManager<ApplicationUser> _userManager, 
-            SignInManager<ApplicationUser> _signInManager)
+            SignInManager<ApplicationUser> _signInManager
+            )
         {
             userManager = _userManager;
             signInManager = _signInManager;
+           
         }
 
         [HttpGet]
@@ -86,9 +88,14 @@ namespace ShoppingListApp.Controllers
             if (result.Succeeded)
             {                
                 await signInManager.SignInAsync(user, isPersistent: false);
+                await userManager.AddToRoleAsync(user, "Customer");
+                await signInManager.SignOutAsync();
+                await signInManager.SignInAsync(user, isPersistent: false);
                 TempData[MessageConstants.SuccessMessage] = "You have successfully become a new user!";
+
                 return RedirectToAction("Index", "Home");
                 //return RedirectToAction("Login", "Account");
+                
             }
 
             foreach (var error in result.Errors)
