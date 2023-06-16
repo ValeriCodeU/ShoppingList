@@ -160,6 +160,8 @@ namespace ShoppingListApp.Controllers
 
             await productService.AddToListAsync(id, userId);
 
+            TempData[MessageConstants.SuccessMessage] = "You have successfully added this product to your shopping list!";
+
             return RedirectToAction(nameof(ListProducts));
         }
 
@@ -168,6 +170,8 @@ namespace ShoppingListApp.Controllers
             var userId = User.Id();
 
             await productService.RemoveFromListAsync(id);
+
+            TempData[MessageConstants.SuccessMessage] = "You have successfully removed this product from your shopping list";           
 
 
 
@@ -181,6 +185,8 @@ namespace ShoppingListApp.Controllers
             var userId = User.Id();
 
             await productService.MarkProductAsSold(id, userId);
+
+            TempData[MessageConstants.SuccessMessage] = "You have successfully added this product as purchased";
 
             return RedirectToAction(nameof(ListProducts));
         }

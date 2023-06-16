@@ -27,7 +27,7 @@ namespace ShoppingListApp.Infrastructure.Configuration
                 },
                 new Category()
                 {
-                    Id = 4,
+                    Id = 2,
                     Name = "Drinks"
                 },
                 new Category()
@@ -37,7 +37,7 @@ namespace ShoppingListApp.Infrastructure.Configuration
                 },
                  new Category()
                 {
-                    Id = 6,
+                    Id = 4,
                     Name = "Books"
                 }
             };

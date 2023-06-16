@@ -208,7 +208,7 @@ namespace ShoppingListApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("ShoppingListApp.Infrastructure.Data.Entities.Product", b =>
@@ -252,7 +252,7 @@ namespace ShoppingListApp.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ShoppingListApp.Infrastructure.Data.Identity.ApplicationUser", b =>
