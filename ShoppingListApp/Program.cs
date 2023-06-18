@@ -5,6 +5,7 @@ using ShoppingListApp.Core.Services;
 using ShoppingListApp.Infrastructure.Data;
 using ShoppingListApp.Infrastructure.Data.Common;
 using ShoppingListApp.Infrastructure.Data.Identity;
+using ShoppingListApp.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ShoppingListDbContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddMvcOptions(options =>
+{
+    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+});
 
 
 builder.Services.ConfigureApplicationCookie(options =>

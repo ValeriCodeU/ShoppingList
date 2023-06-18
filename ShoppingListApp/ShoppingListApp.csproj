@@ -22,4 +22,8 @@
     <ProjectReference Include="..\ShoppingListApp.Core\ShoppingListApp.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelBinders\" />
+  </ItemGroup>
+
 </Project>
