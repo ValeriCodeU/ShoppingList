@@ -162,7 +162,7 @@ namespace ShoppingListApp.Controllers
         {
             await productService.AddToListAsync(id, User.Id());
 
-            TempData[MessageConstants.SuccessMessage] = "You have successfully added this product to your shopping list!";
+            TempData[MessageConstants.SuccessMessage] = "You have successfully added this product to your shopping list!";            
 
             return RedirectToAction(nameof(ListProducts));
         }
@@ -172,6 +172,7 @@ namespace ShoppingListApp.Controllers
 
             if (!await productService.IsOwnerAsync(User.Id(), id)) 
             {
+                TempData[MessageConstants.ErrorMessage] = "You cannot access this service!";
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
