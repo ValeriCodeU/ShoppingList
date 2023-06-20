@@ -129,12 +129,18 @@ namespace ShoppingListApp.Controllers
             if (!await productService.ProductExistsAsync(id))
             {
                 TempData[MessageConstants.ErrorMessage] = "This product doest not exists!";
+                model.Categories = await categoryService.AllCategoriesAsync();
                 return RedirectToAction(nameof(All));
             }
 
+            if (!await categoryService.CategoryExistsAsync(model.CategoryId))
+            {
+                TempData[MessageConstants.ErrorMessage] = "Category does not exist!";
+            }
 
             if (!ModelState.IsValid)
             {
+                model.Categories = await categoryService.AllCategoriesAsync();
                 return View(model);
             }
 

@@ -56,7 +56,6 @@ namespace ShoppingListApp.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-
             if (!await categoryService.CategoryExistsAsync(id))
             {
                 TempData[MessageConstants.ErrorMessage] = "Category does not exist!";
@@ -78,8 +77,7 @@ namespace ShoppingListApp.Controllers
         {
             if (!await categoryService.CategoryExistsAsync(id))
             {
-                TempData[MessageConstants.ErrorMessage] = "Category does not exist!";
-
+                TempData[MessageConstants.ErrorMessage] = "Category does not exist!";                
                 return RedirectToAction("Index", "Home");
             }
 
