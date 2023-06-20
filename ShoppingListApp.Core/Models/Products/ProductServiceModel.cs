@@ -19,5 +19,7 @@ namespace ShoppingListApp.Core.Models.Products
         [Display(Name = "Is Sold")]
 
         public bool IsSold { get; set; }
+
+        public Guid CustomerId { get; set; }
     }
 }

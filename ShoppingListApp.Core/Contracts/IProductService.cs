@@ -11,12 +11,13 @@ namespace ShoppingListApp.Core.Contracts
 
         Task<ProductDetailsViewModel> ProductDetailsByIdAsync(int id);
 
-        Task<ProductQueryServiceModel> AllAsync(
+        Task<ProductQueryServiceModel> AllAsync(            
             string? category = null,
             string? searchTerm = null,
             ProductSorting sorting = ProductSorting.Newest,
             int currentPage = 1,
-            int productsPerPage = 1);
+            int productsPerPage = 1
+            );
 
         Task<IEnumerable<string>> AllGategoriesNamesAsync();
 
@@ -35,5 +36,7 @@ namespace ShoppingListApp.Core.Contracts
         Task MarkProductAsSold(int productId, Guid userId);
 
         Task<bool> DeleteProductAsync(int productId);
+
+        Task<bool> IsOwnerAsync(Guid userId, int productId);
     }
 }

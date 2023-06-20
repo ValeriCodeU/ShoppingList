@@ -79,7 +79,7 @@ namespace ShoppingListApp.Controllers
         {
             var productsPerPage = AllProductsQueryModel.ProductPerPage;
             var result = await productService
-                .AllAsync(
+                .AllAsync(              
                 query.Category,
                 query.SearchTerm,
                 query.Sorting,
@@ -169,10 +169,15 @@ namespace ShoppingListApp.Controllers
 
         public async Task<IActionResult> RemoveProductFromCollection(int id)
         {
+
+            if (!await productService.IsOwnerAsync(User.Id(), id)) 
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
             await productService.RemoveFromListAsync(id);
 
             TempData[MessageConstants.SuccessMessage] = "You have successfully removed this product from your shopping list";
-
 
             return RedirectToAction(nameof(ListProducts));
         }

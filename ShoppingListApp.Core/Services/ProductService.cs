@@ -65,7 +65,7 @@ namespace ShoppingListApp.Core.Services
                     Name = p.Name,                    
                     ImageUrl = p.ImageUrl,
                     IsSold = p.CustomerId != null,
-                    Price = p.Price
+                    Price = p.Price                   
                 }).ToListAsync();
 
             var totalProducts = await products.CountAsync();
@@ -141,6 +141,23 @@ namespace ShoppingListApp.Core.Services
                     Price = p.Price,
                     IsSold = p.CustomerId == userid && p.IsActive == false
                 }).ToListAsync();
+        }
+
+        public async Task<bool> IsOwnerAsync(Guid userId, int productId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            if (product.CustomerId != userId)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task MarkProductAsSold(int productId, Guid userId)
