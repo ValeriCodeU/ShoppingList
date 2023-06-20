@@ -94,11 +94,11 @@ namespace ShoppingListApp.Controllers
             return View(query);
         }
 
-        [HttpGet]       
+        [HttpGet]
         [Authorize(Roles = AdminRoleName)]
 
         public async Task<IActionResult> Edit(int id)
-        {           
+        {
 
             if (!await productService.ProductExistsAsync(id))
             {
@@ -153,18 +153,14 @@ namespace ShoppingListApp.Controllers
 
         public async Task<IActionResult> ListProducts()
         {
-            var userId = User.Id();
-
-            var model = await productService.GetUserProductsAsync(userId);            
+            var model = await productService.GetUserProductsAsync(User.Id());
 
             return View(model);
         }
 
         public async Task<IActionResult> AddProductToCollection(int id)
         {
-            var userId = User.Id();
-
-            await productService.AddToListAsync(id, userId);
+            await productService.AddToListAsync(id, User.Id());
 
             TempData[MessageConstants.SuccessMessage] = "You have successfully added this product to your shopping list!";
 
@@ -173,12 +169,9 @@ namespace ShoppingListApp.Controllers
 
         public async Task<IActionResult> RemoveProductFromCollection(int id)
         {
-            var userId = User.Id();
-
             await productService.RemoveFromListAsync(id);
 
-            TempData[MessageConstants.SuccessMessage] = "You have successfully removed this product from your shopping list";           
-
+            TempData[MessageConstants.SuccessMessage] = "You have successfully removed this product from your shopping list";
 
 
             return RedirectToAction(nameof(ListProducts));
@@ -199,7 +192,7 @@ namespace ShoppingListApp.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> Delete (int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!await productService.ProductExistsAsync(id))
             {
@@ -213,7 +206,7 @@ namespace ShoppingListApp.Controllers
             {
                 Name = product.Name,
                 Id = product.Id
-                
+
             };
 
             return View(model);
@@ -221,7 +214,7 @@ namespace ShoppingListApp.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Delete (ProductDeleteViewModel model)
+        public async Task<IActionResult> Delete(ProductDeleteViewModel model)
         {
             if (!await productService.ProductExistsAsync(model.Id))
             {
