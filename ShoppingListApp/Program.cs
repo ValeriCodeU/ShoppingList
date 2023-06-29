@@ -31,19 +31,6 @@ builder.Services.AddControllersWithViews().AddMvcOptions(options =>
     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 });
 
-
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-});
-
-
-
-builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
