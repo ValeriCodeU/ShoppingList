@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Services;
+using ShoppingListApp.Extensions;
 using ShoppingListApp.Infrastructure.Data;
 using ShoppingListApp.Infrastructure.Data.Common;
 using ShoppingListApp.Infrastructure.Data.Identity;
@@ -30,6 +31,8 @@ builder.Services.AddControllersWithViews().AddMvcOptions(options =>
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 });
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

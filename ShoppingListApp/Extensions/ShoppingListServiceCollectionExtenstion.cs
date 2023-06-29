@@ -1,7 +1,6 @@
 ﻿using ShoppingListApp.Core.Contracts;
 using ShoppingListApp.Core.Services;
 using ShoppingListApp.Infrastructure.Data.Common;
-using System.Runtime.CompilerServices;
 
 namespace ShoppingListApp.Extensions
 {
